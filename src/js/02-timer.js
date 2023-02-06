@@ -2,7 +2,6 @@ import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 import Notiflix from 'notiflix';
 
-const INTERVAL__TIME = 1000;
 const refs = {
   inputText: document.querySelector('#datetime-picker'),
   startBtn: document.querySelector('[data-start]'),
@@ -12,7 +11,7 @@ const refs = {
   seconds: document.querySelector('[data-seconds]'),
 };
 
-let interval = null;
+let timerId = null;
 let selectedDate = Date.now();
 
 const options = {
@@ -38,7 +37,7 @@ refs.startBtn.addEventListener('click', startCountdown);
 function startCountdown() {
   refs.startBtn.setAttribute('disabled', '');
   refs.inputText.setAttribute('disabled', '');
-  interval = setInterval(timeOut, INTERVAL__TIME);
+  timerId = setInterval(timeOut, 1000);
 }
 
 function timeOut() {
@@ -46,7 +45,7 @@ function timeOut() {
 
   if (getTimeComponents <= 0) {
     Notiflix.Notify.success('Timer is Over!');
-    clearInterval(interval);
+    clearInterval(timerId);
     return;
   }
 
