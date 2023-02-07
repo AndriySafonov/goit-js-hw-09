@@ -11,12 +11,14 @@ function onStart() {
     document.body.style.backgroundColor = getRandomHexColor();
     },1000);
     startBtn.disabled = true;
-    
+    stopBtn.disabled = false;
 }
 
 function onStop() {
     clearInterval(timer);
-    stopBtn.disabled = false;
+    stopBtn.disabled = true;
+    startBtn.disabled = false;
+    console.log('stop');
     
 }
 function getRandomHexColor() {
